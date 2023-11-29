@@ -15,15 +15,15 @@ OK="${GREEN}[OK]${NC}"
 Error="${RED}[Mistake]${NC}"
 clear
 echo -e "${OK}Please Wait..."
-systemctl daemon-reload
+service daemon-reload
 sleep 1
-systemctl enable xray
+service xray enable
 sleep 1
-systemctl restart xray
-systemctl restart nginx
+service xray restart
+service nginx restart
 sleep 1
-systemctl enable runn
-systemctl restart runn
+service runn enable
+service runn restart
 clear
 echo "${OK}Xray.service berhasil di restart"
 sleep 3
