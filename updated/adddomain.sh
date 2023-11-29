@@ -83,10 +83,10 @@ apt install wget curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg
 apt install socat cron bash-completion ntpdate -y
 ntpdate pool.ntp.org
 apt -y install chrony
-timedatectl set-ntp true
+date set-ntp true
 service chronyd enable && service chronyd restart
 service chrony enable && service chrony restart
-timedatectl set-timezone Asia/Jakarta
+date set-timezone Asia/Jakarta
 chronyc sourcestats -v
 chronyc tracking -v
 mkdir -p /etc/xray
