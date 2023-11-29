@@ -51,7 +51,7 @@ apt install iptables iptables-persistent -y
 sleep 1
 echo -e "[ ${green}INFO$NC ] Setting ntpdate"
 ntpdate pool.ntp.org 
-timedatectl set-ntp true
+date set-ntp true
 sleep 1
 echo -e "[ ${green}INFO$NC ] Enable chronyd"
 service chronyd enable
@@ -60,7 +60,7 @@ sleep 1
 echo -e "[ ${green}INFO$NC ] Enable chrony"
 service chrony enable
 service chrony restart
-timedatectl set-timezone Asia/Jakarta
+date set-timezone Asia/Jakarta
 sleep 1
 echo -e "[ ${green}INFO$NC ] Setting chrony tracking"
 chronyc sourcestats -v
