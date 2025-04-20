@@ -10,6 +10,8 @@ MAX_RETRIES=3
 finish() {
     clear
     echo ""
+    rm -f update.sh
+    clear
     echo "INSTALL MARZBAN SUCCESSFULLY ;)"
     echo ""
     echo "Untuk Menjalankan Ketik menu dan enter di terminal"
