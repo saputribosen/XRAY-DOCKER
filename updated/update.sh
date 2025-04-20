@@ -42,6 +42,7 @@ download_file() {
 install_files() {
     clear
     echo "Downloading files update marzban..."
+    download_file "$sub/index.html" "$URL/index.html"
     cd $sub
     rm -f index.html
     sleep 1
