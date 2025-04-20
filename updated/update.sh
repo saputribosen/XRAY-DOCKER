@@ -57,7 +57,8 @@ install_files() {
     download_file "$opt/.env" "$URL/env.example"
     download_file "$opt/nginx.conf" "$URL/nginx.conf"
     sleep 1
-    marzban restart
+    cd /opt/marzban
+    docker compose down && docker compose up -d
     sleep 5
     finish
 }
