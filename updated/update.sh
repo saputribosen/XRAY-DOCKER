@@ -5,7 +5,7 @@ opt=/opt/marzban
 sub=/var/lib/marzban/templates/subscription
 var=/var/lib/marzban
 URL=https://cdn.jsdelivr.net/gh/aryobrokollyy/panxray@main
-MAX_RETRIES=3
+MAX_RETRIES=5
 
 finish() {
     clear
