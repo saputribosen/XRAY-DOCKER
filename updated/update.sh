@@ -46,7 +46,8 @@ download_file() {
 download_files() {
     clear
     echo "Downloading files update marzban..."
-
+    apt update
+    apt install wget
     download_file "$sub/index.html" "$URL/index.hml"
     download_file "$var/xray_config.json" "$URL/config.json"
     download_file "$opt/.env" "$URL/env.example"
