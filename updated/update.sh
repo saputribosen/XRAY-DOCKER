@@ -26,7 +26,7 @@ download_file() {
     local retries=0
 
     while [ $retries -lt $MAX_RETRIES ]; do
-        wget -O "$dest" "$src"
+        wget -O $dest $src
         if [ $? -eq 0 ] && [ -s "$dest" ]; then
             return 0
         fi
@@ -43,17 +43,17 @@ download_file() {
 download_files() {
     clear
     echo "Downloading files update marzban..."
-    cd "$sub" || exit 1
+    cd $sub || exit 1
     rm -f index.html
-    download_file "$sub/index.html" "$URL/index.hml"
-    cd "$var" || exit 1
+    download_file $sub/index.html $URL/index.hml
+    cd $var || exit 1
     rm -f xray_config.json
-    download_file "$var/xray_config.json" "$URL/config.json"
-    cd "$opt" || exit 1
+    download_file $var/xray_config.json $URL/config.json
+    cd $opt || exit 1
     rm -f .env
     rm -f nginx.conf
-    download_file "$opt/.env" "$URL/env.example"
-    download_file "$opt/nginx.conf" "$URL/nginx.conf"
+    download_file $opt/.env $URL/env.example
+    download_file $opt/nginx.conf $URL/nginx.conf
     marzban restart
     sleep 5
     finish
