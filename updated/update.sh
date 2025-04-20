@@ -19,7 +19,6 @@ finish() {
     echo ""
     echo ""
 }
-
 download_files() {
     clear
     echo "Downloading files update marzban..."
