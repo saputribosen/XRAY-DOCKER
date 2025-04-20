@@ -36,8 +36,9 @@ download_file() {
         echo "Gagal mengunduh $src, mencoba ulang... ($((retries + 1))/$MAX_RETRIES)"
         retries=$((retries + 1))
         sleep 2
+        clear
     done
-
+    clear
     echo "Gagal mengunduh $src setelah $MAX_RETRIES percobaan. Menghentikan instalasi."
     exit 1
 }
