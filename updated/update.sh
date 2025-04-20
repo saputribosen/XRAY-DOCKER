@@ -20,23 +20,42 @@ finish() {
     echo ""
     rm -f update.sh
 }
+download_file() {
+    local dest=$1
+    local src=$2
+    local retries=0
+
+    while [ $retries -lt $MAX_RETRIES ]; do
+        wget -O "$dest" "$src"
+        if [ $? -eq 0 ] && [ -s "$dest" ]; then
+            return 0
+        fi
+        echo "Gagal mengunduh $src, mencoba ulang... ($((retries + 1))/$MAX_RETRIES)"
+        retries=$((retries + 1))
+        sleep 2
+        clear
+    done
+    clear
+    echo "Gagal mengunduh $src setelah $MAX_RETRIES percobaan. Menghentikan instalasi."
+    exit 1
+}
 install_files() {
     clear
     echo "Downloading files update marzban..."
     cd $sub
     rm -f index.html
     sleep 1
-    wget -O $sub/index.html $URL/index.html
+    download_file "$sub/index.html" "$URL/index.html"
     cd $var
     rm -f xray_config.json
     sleep 1
-    wget -O $var/xray_config.json $URL/config.json
+    download_file "$var/xray_config.json" "$URL/config.json"
     cd $opt
     rm -f .env
     rm -f nginx.conf
     sleep 1
-    wget -O $opt/.env $URL/env.example
-    wget -O $opt/nginx.conf $URL/nginx.conf
+    download_file "$opt/.env" "$URL/env.example"
+    download_file "$opt/nginx.conf" "$URL/nginx.conf"
     sleep 1
     marzban restart
     sleep 5
