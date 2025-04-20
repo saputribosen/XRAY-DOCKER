@@ -26,7 +26,6 @@ download_file() {
     local retries=0
 
     while [ $retries -lt $MAX_RETRIES ]; do
-        rm -f "$dest"
         wget -O "$dest" "$src"
         if [ $? -eq 0 ] && [ -s "$dest" ]; then
             return 0
