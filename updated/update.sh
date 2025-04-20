@@ -24,13 +24,11 @@ download_file() {
     local dest=$1
     local src=$2
     local retries=0
-    local tmp_file=$(mktemp)
 
     while [ $retries -lt $MAX_RETRIES ]; do
-        rm -f "$tmp_file"
-        wget -q -O "$tmp_file" "$src"
-        if [ $? -eq 0 ] && [ -s "$tmp_file" ]; then
-            cat "$tmp_file" > "$dest"
+        rm -f "$dest"
+        wget -O "$dest" "$src"
+        if [ $? -eq 0 ] && [ -s "$dest" ]; then
             return 0
         fi
         echo "Gagal mengunduh $src, mencoba ulang... ($((retries + 1))/$MAX_RETRIES)"
@@ -39,7 +37,6 @@ download_file() {
     done
 
     echo "Gagal mengunduh $src setelah $MAX_RETRIES percobaan. Menghentikan instalasi."
-    rm -f "$tmp_file"
     exit 1
 }
 
@@ -60,7 +57,7 @@ echo ""
 echo "Install Script Marzban x Membership from repo aryo."
 
 while true; do
-    read -p "This will overwrite file content in $var. Do you want to continue (y/n)? " yn
+    read -p "This will download the files into $var. Do you want to continue (y/n)? " yn
     case $yn in
         [Yy]* ) download_files; break;;
         [Nn]* ) exit;;
