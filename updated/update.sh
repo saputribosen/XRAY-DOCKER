@@ -43,17 +43,8 @@ install_files() {
     clear
     echo "Downloading files update marzban..."
     download_file "$sub/index.html" "$URL/index.html"
-    cd "$sub" || exit 1
-    rm -f index.html
-    sleep 1
-    download_file "$sub/index.html" "$URL/index.html"
-    cd "$var" || exit 1
-    rm -f xray_config.json
     sleep 1
     download_file "$var/xray_config.json" "$URL/config.json"
-    cd "$opt" || exit 1
-    rm -f .env
-    rm -f nginx.conf
     sleep 1
     download_file "$opt/.env" "$URL/env.example"
     download_file "$opt/nginx.conf" "$URL/nginx.conf"
