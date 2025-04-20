@@ -10,8 +10,6 @@ MAX_RETRIES=3
 finish() {
     clear
     echo ""
-    rm -f update.sh
-    clear
     echo "INSTALL MARZBAN SUCCESSFULLY ;)"
     echo ""
     echo "Untuk Menjalankan Ketik menu dan enter di terminal"
@@ -26,28 +24,29 @@ download_file() {
     local dest=$1
     local src=$2
     local retries=0
+    local tmp_file=$(mktemp)
 
     while [ $retries -lt $MAX_RETRIES ]; do
-        wget -O "$dest" "$src"
-        if [ $? -eq 0 ] && [ -s "$dest" ]; then
-            chmod +x "$dest"
+        wget -q -O "$tmp_file" "$src"
+        if [ $? -eq 0 ] && [ -s "$tmp_file" ]; then
+            cat "$tmp_file" > "$dest"
+            rm -f "$tmp_file"
             return 0
         fi
         echo "Gagal mengunduh $src, mencoba ulang... ($((retries + 1))/$MAX_RETRIES)"
         retries=$((retries + 1))
         sleep 2
-        clear
     done
-    clear
+
     echo "Gagal mengunduh $src setelah $MAX_RETRIES percobaan. Menghentikan instalasi."
+    rm -f "$tmp_file"
     exit 1
 }
 
 download_files() {
     clear
     echo "Downloading files update marzban..."
-    apt update
-    apt install wget
+
     download_file "$sub/index.html" "$URL/index.hml"
     download_file "$var/xray_config.json" "$URL/config.json"
     download_file "$opt/.env" "$URL/env.example"
@@ -61,7 +60,7 @@ echo ""
 echo "Install Script Marzban x Membership from repo aryo."
 
 while true; do
-    read -p "This will download the files into $var. Do you want to continue (y/n)? " yn
+    read -p "This will overwrite file content in $var. Do you want to continue (y/n)? " yn
     case $yn in
         [Yy]* ) download_files; break;;
         [Nn]* ) exit;;
