@@ -44,9 +44,15 @@ download_file() {
 download_files() {
     clear
     echo "Downloading files update marzban..."
-
+    cd "$sub" || exit 1
+    rm -f index.html
     download_file "$sub/index.html" "$URL/index.hml"
+    cd "$var" || exit 1
+    rm -f xray_config.json
     download_file "$var/xray_config.json" "$URL/config.json"
+    cd "$opt" || exit 1
+    rm -f .env
+    rm -f nginx.conf
     download_file "$opt/.env" "$URL/env.example"
     download_file "$opt/nginx.conf" "$URL/nginx.conf"
     marzban restart
