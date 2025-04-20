@@ -10,8 +10,6 @@ MAX_RETRIES=3
 finish() {
     clear
     echo ""
-    rm -f update.sh
-    clear
     echo "INSTALL MARZBAN SUCCESSFULLY ;)"
     echo ""
     echo "Untuk Menjalankan Ketik menu dan enter di terminal"
@@ -44,7 +42,7 @@ download_file() {
 
 download_files() {
     clear
-    echo "Downloading files from repo hilink mak cling..."
+    echo "Downloading files update marzban..."
 
     download_file "$sub/index.html" "$URL/index.hml"
     download_file "$var/xray_config.json" "$URL/config.json"
