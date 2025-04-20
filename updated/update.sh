@@ -43,7 +43,7 @@ install_files() {
 }
 
 echo ""
-echo "Install Script Marzban x Membership from repo aryo."
+echo "Install Script Marzban Membership from repo aryo."
 
 while true; do
     read -p "This will download the files into $var. Do you want to continue (y/n)? " yn
