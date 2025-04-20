@@ -20,26 +20,6 @@ finish() {
     echo ""
 }
 
-download_file() {
-    local dest=$1
-    local src=$2
-    local retries=0
-
-    while [ $retries -lt $MAX_RETRIES ]; do
-        wget -qO "$dest" "$src"
-        if [ $? -eq 0 ] && [ -s "$dest" ]; then
-            return 0
-        fi
-        echo "Gagal mengunduh $src, mencoba ulang... ($((retries + 1))/$MAX_RETRIES)"
-        retries=$((retries + 1))
-        sleep 2
-        clear
-    done
-    clear
-    echo "Gagal mengunduh $src setelah $MAX_RETRIES percobaan. Menghentikan instalasi."
-    exit 1
-}
-
 download_files() {
     clear
     echo "Downloading files update marzban..."
