@@ -46,17 +46,17 @@ download_files() {
     cd $sub
     rm -f index.html
     sleep 1
-    download_file "$sub/index.html" "$URL/index.html"
+    wget -O $sub/index.html $URL/index.html
     cd $var
     rm -f xray_config.json
     sleep 1
-    download_file $var/xray_config.json $URL/config.json
+    wget -O $var/xray_config.json $URL/config.json
     cd $opt
     rm -f .env
     rm -f nginx.conf
     sleep 1
-    download_file $opt/.env $URL/env.example
-    download_file $opt/nginx.conf $URL/nginx.conf
+    wget -O $opt/.env $URL/env.example
+    wget -O $opt/nginx.conf $URL/nginx.conf
     sleep 1
     marzban restart
     sleep 5
