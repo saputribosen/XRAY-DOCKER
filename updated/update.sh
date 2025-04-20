@@ -27,10 +27,10 @@ download_file() {
     local tmp_file=$(mktemp)
 
     while [ $retries -lt $MAX_RETRIES ]; do
+        rm -f "$tmp_file"
         wget -q -O "$tmp_file" "$src"
         if [ $? -eq 0 ] && [ -s "$tmp_file" ]; then
             cat "$tmp_file" > "$dest"
-            rm -f "$tmp_file"
             return 0
         fi
         echo "Gagal mengunduh $src, mencoba ulang... ($((retries + 1))/$MAX_RETRIES)"
