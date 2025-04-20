@@ -26,7 +26,7 @@ download_file() {
     local retries=0
 
     while [ $retries -lt $MAX_RETRIES ]; do
-        wget -O "$dest" "$src"
+        wget -qO "$dest" "$src"
         if [ $? -eq 0 ] && [ -s "$dest" ]; then
             return 0
         fi
@@ -45,15 +45,19 @@ download_files() {
     echo "Downloading files update marzban..."
     cd $sub
     rm -f index.html
+    sleep 1
     download_file "$sub/index.html" "$URL/index.html"
     cd $var
     rm -f xray_config.json
+    sleep 1
     download_file $var/xray_config.json $URL/config.json
     cd $opt
     rm -f .env
     rm -f nginx.conf
+    sleep 1
     download_file $opt/.env $URL/env.example
     download_file $opt/nginx.conf $URL/nginx.conf
+    sleep 1
     marzban restart
     sleep 5
     finish
