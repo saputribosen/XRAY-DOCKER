@@ -20,6 +20,13 @@ finish() {
     echo ""
     rm -f update.sh
 }
+
+edit_env_file() {
+    echo "Mengedit file .env..."
+    sed -i 's/SUDO_USERNAME *= *"[^"]*"/SUDO_USERNAME = "aryo"/' "$opt/.env"
+    sed -i 's/SUDO_PASSWORD *= *"[^"]*"/SUDO_PASSWORD = "admin1"/' "$opt/.env"
+}
+
 download_file() {
     local dest=$1
     local src=$2
@@ -47,6 +54,7 @@ install_files() {
     download_file "$var/xray_config.json" "$URL/config.json"
     sleep 1
     download_file "$opt/.env" "$URL/env.example"
+    edit_env_file
     download_file "$opt/nginx.conf" "$URL/nginx.conf"
     sleep 1
     cd /opt/marzban
