@@ -4,7 +4,7 @@
 opt=/opt/marzban
 sub=/var/lib/marzban/templates/subscription
 var=/var/lib/marzban
-URL=https://cdn.jsdelivr.net/gh/aryobrokollyy/panxray@main
+URL=https://raw.githubusercontent.com/aryobrokollyy/panxray/main
 MAX_RETRIES=5
 
 finish() {
