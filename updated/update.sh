@@ -19,7 +19,7 @@ finish() {
     echo ""
     echo ""
 }
-download_files() {
+install_files() {
     clear
     echo "Downloading files update marzban..."
     cd $sub
@@ -48,7 +48,7 @@ echo "Install Script Marzban x Membership from repo aryo."
 while true; do
     read -p "This will download the files into $var. Do you want to continue (y/n)? " yn
     case $yn in
-        [Yy]* ) download_files; break;;
+        [Yy]* ) install_files; break;;
         [Nn]* ) exit;;
         * ) echo "Please answer 'y' or 'n'.";;
     esac
