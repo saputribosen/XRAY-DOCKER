@@ -18,6 +18,7 @@ finish() {
     echo "SALAM SEDULURAN"
     echo ""
     echo ""
+    rm -f update.sh
 }
 install_files() {
     clear
